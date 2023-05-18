@@ -8,15 +8,13 @@
     margin: 0;
     padding: 0;
     font-family:'Helvetica Bold';
+
 }
 :root{
-    --main-card-background-color: rgb(40, 40, 40);
-    --main-card-text-color:white;
-    --button-text-color:#50a4af;
-    --form-button-background-color:rgb(51, 105, 112);
-    --form-button-text-color:white;
+    --text-color:white;
+    --secondary-color:#50a4af;
 
-    --background-image-url:url(Imgs/Background.jpg);
+    --background-image-url:url(Imgs/1.png);
 }
 
 .flex-column{
@@ -47,7 +45,7 @@ main{
     position: relative;
     width: min(50rem, 90vw);
     height: 60vh;
-    color: var(--main-card-text-color);
+    color: var(--text-color);
     border-radius: 20px;
     background: rgba(0, 0, 0, 0.46);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -68,9 +66,10 @@ main{
 }
 
 button{
-    color:var(--button-text-color);
+    font-size: 16px;
     background-color: transparent;
     padding-left: .5em;
+    color: var(--secondary-color);
 }
 
 button:hover{
@@ -82,11 +81,12 @@ button:hover{
     gap:10px;
 }
 
-.socials img{
+.socials svg{
+    color: var(--text-color);
     width: 30px;
 }
 
-.socials img:hover{
+.socials svg:hover{
     cursor: pointer;
     transform: scale(1.1);
 }
@@ -109,7 +109,7 @@ button:hover{
     height: 100%;
     background-image: var(--background-image-url);
     background-size: cover;
-    filter: saturate(0.2) brightness(0.3);
+    filter: saturate(0.8) brightness(0.3);
     transition: border-radius 0.8s ease-in-out;
     border-radius: 0 20px 20px 0;
 }
@@ -124,39 +124,40 @@ button:hover{
     position: absolute;
 }
 
-form{
+.form{
     width: 70%;
     height: 90%;
     gap:.8rem;
 }
 
-form label{
+.form label{
     align-self: flex-start;
     font-size: 1.2em;
 }
 
-form input{
+.form input{
     width: 100%;
     padding: 0.5em 0;
+    color: var(--text-color);
     background-color: transparent;
-    border-bottom: 2px solid white;
+    border-bottom: 2px solid var(--text-color);
     box-sizing: border-box;
 }
 
-form button{
+.form button{
     background-color: transparent;
     color: var(--form-button-text-color);
     width: 100%;
     margin-top:20px;
     padding: .6em 2em;
-    border:2px solid white;
+    border:2px solid var(--text-color);
     box-sizing: border-box;
     font-size: .9em;
     transition:all .3s ease-in-out, transform 0.8s ease-in-out ;
 }
 
-form button:hover{
-    background-color: white;
+.form button:hover{
+    background-color: var(--text-color);
     color: black;
     border: 2px solid black;
 }
@@ -223,16 +224,16 @@ form button:hover{
         width: 25px;
     }
 
-    form label, form input{
+    .form label, .form input{
         font-size: 14px;
     }
 
-    form input{
+    .form input{
         margin-top:-10px;
         margin-bottom: 5px;
     }
 
-    form button{
+    .form button{
         margin-top: 10px;
     }
 }
@@ -267,11 +268,11 @@ form button:hover{
         border-radius:20px 0 20px 0;
     }
 
-    form label, form input{
+    .form label, form input{
         font-size: .8em;
     }
 
-    form input{
+    .form input{
         margin-top: -10px;
     }
 
