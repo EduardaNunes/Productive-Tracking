@@ -59,6 +59,7 @@ function login(username, password){
       const user = userCredential.user;
 
       window.alert('Conta Logada com Sucesso')
+      location.replace("../Pages/main_page.html")
 
     })
     .catch((error) => {

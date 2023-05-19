@@ -1,0 +1,121 @@
+:root{
+    --main-dark-color:rgb(14, 14, 14);
+    --text-color:white;
+    --main-light-color:rgba(255, 255, 255, 0.726);
+}
+
+body{
+    gap: 2vh;
+}
+
+nav{
+    width: 100vw;
+    height: 60px;
+    background-color: var(--main-dark-color);
+}
+
+main{
+    width: 90vw;
+    height: calc(96vh - 60px);
+    background: rgba(0, 0, 0, 0.46);
+    border-radius: 20px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(1.5px);
+    -webkit-backdrop-filter: blur(9.5px);
+    
+    gap:calc(20% / 3);
+}
+
+.section-to-do-card{
+    width: 30%;
+    height: 80%;
+    gap: 20px;
+}
+
+.section-to-do-card header{
+    width: 100%;
+    height: 10%;
+    background-color: var(--main-dark-color);
+    color: var(--text-color);
+}
+
+.to-do-card{
+    position: relative;
+    width: 100%;
+    max-height: 90%;
+    background-color: var(--main-light-color);
+}
+
+.tasks{
+    margin: 20px;
+    margin-bottom: 35px;
+    width: 100%;
+    max-height: 90%;
+    align-self: flex-start;
+    justify-content: flex-start;
+    flex-direction: column-reverse;
+    box-sizing: content-box;
+    overflow-x: auto;
+}
+
+.new-task{
+    gap: 10px;
+    width: 100%;
+    min-height: 50px;
+}
+
+.checker{
+    position: relative;
+}
+
+.input-task-check,.span-task-check,.checker{
+    width: 25px;
+    height: 25px;
+}
+
+.input-task-check{
+    position: absolute;
+    opacity: 0;
+}
+
+.span-task-check{
+    position: absolute;
+    border: 2px solid var(--main-dark-color);
+    box-sizing: border-box;
+}
+
+.checker:hover{
+    background-color: rgb(255, 0, 0);
+}
+
+.input-task-text{
+    width: 80%;
+    height: 40px;
+    background-color: transparent;
+    border-bottom:2px solid var(--main-dark-color);
+}
+
+.btn-trash{
+    width: 20px;
+    background-color: transparent;
+    color: var(--main-dark-color);
+}
+
+.btn-new-task{
+    height: 60px;
+    position:absolute;
+    background-color: var(--main-dark-color);
+    color: var(--text-color);
+    padding: 1em 2em;
+    border-radius: 25px;
+    font-size: 1em;
+    bottom: -30px;
+    justify-self: flex-end;
+    box-shadow: 6px 6px 8px 1px rgba(0, 0, 0, 0.507);
+}
+
+.tracking-card{
+    width: 50%;
+    height: 60%;
+    background-color: var(--main-dark-color);
+}
