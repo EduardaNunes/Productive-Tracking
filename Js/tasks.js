@@ -12,7 +12,7 @@ btnNewTask.addEventListener('click', () =>{
 
     i++
 
-    const task = new newTask('identificador'+i, 'oi ' + i, false)
+    const task = new newTask('identifier'+i, 'oi ' + i, false)
     task.create()
     tasks.push(task)
 
@@ -24,7 +24,7 @@ btnNewTask.addEventListener('click', () =>{
 
 })
 
-const task = new newTask('identificador'+i, 'oi ' + i, false)
+const task = new newTask('identifier'+i, 'oi ' + i, false)
 task.create()
 tasks.push(task)
 
@@ -38,16 +38,17 @@ function deleteTask(){
 
     setTimeout(() => {
         this.parentElement.remove()
-        const identificador = tasks.findIndex(obj => obj.id == this.id)
-        tasks.splice(identificador, 1)
+        const identifier = tasks.findIndex(obj => obj.id == this.id)
+        tasks.splice(identifier, 1)
 
     }, 600)
 }
 
 function checkTask(){
+
+    const identifier = tasks.findIndex(obj => obj.id == this.id)
     
     this.firstChild.classList.toggle('hide')
-
     this.firstChild.classList.add('check-animation')
 
     if (!this.firstChild.classList.contains('hide')){
@@ -55,13 +56,14 @@ function checkTask(){
         const checkMarkSound = new Audio('../Sounds/checkmark.mp3')
         checkMarkSound.volume = 0.3
         checkMarkSound.play()
-        tasks[identificador].complete = true
+        tasks[identifier].complete = true
 
     }else{
 
         const uncheckSound = new Audio('../Sounds/uncheckSound.mp3')
         uncheckSound.volume = 0.8
         uncheckSound.play()
-        tasks[identificador].complete = false
+        tasks[identifier].complete = false
+
     }
 }
