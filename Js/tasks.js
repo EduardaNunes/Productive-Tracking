@@ -3,6 +3,7 @@ const btnNewTask = document.querySelector('.btn-new-task')
 let i = 0
 const tasks = []
 
+
 btnNewTask.addEventListener('click', () =>{
 
     const newTaskSound = new Audio('../Sounds/newTaskSound.mp3')
@@ -11,7 +12,7 @@ btnNewTask.addEventListener('click', () =>{
 
     i++
 
-    const task = new newTask(i, 'oi ' + i, false)
+    const task = new newTask('identificador'+i, 'oi ' + i, false)
     task.create()
     tasks.push(task)
 
@@ -23,14 +24,12 @@ btnNewTask.addEventListener('click', () =>{
 
 })
 
-const task = new newTask(i, 'oi ' + i, false)
+const task = new newTask('identificador'+i, 'oi ' + i, false)
 task.create()
 tasks.push(task)
 
- 
-
 function deleteTask(){
-
+    
     const deleteTaskSound = new Audio('../Sounds/deleteTaskSound.mp3')
     deleteTaskSound.volume = 0.8
     deleteTaskSound.play()
@@ -39,10 +38,10 @@ function deleteTask(){
 
     setTimeout(() => {
         this.parentElement.remove()
-        const identification = this.parentElement.id
-        delete tasks[identification]
-    }, 600)
+        const identificador = tasks.findIndex(obj => obj.id == this.id)
+        tasks.splice(identificador, 1)
 
+    }, 600)
 }
 
 function checkTask(){
@@ -56,11 +55,13 @@ function checkTask(){
         const checkMarkSound = new Audio('../Sounds/checkmark.mp3')
         checkMarkSound.volume = 0.3
         checkMarkSound.play()
+        tasks[identificador].complete = true
 
     }else{
 
         const uncheckSound = new Audio('../Sounds/uncheckSound.mp3')
         uncheckSound.volume = 0.8
         uncheckSound.play()
+        tasks[identificador].complete = false
     }
 }
