@@ -5,23 +5,38 @@
     --task-elements-color:rgba(255, 255, 255, 0.884);
     --task-elements-hover:rgba(228, 228, 228, 0.281);
     --task-trash-hover:rgba(228, 228, 228, 0.781);
+    --nav-elements-color:rgba(255, 255, 255, 0.884);;
 
 }
 
 body{
     width: 100vw;
     height: 100vh;
-    justify-content: flex-start;
     align-items: center;
     display: flex;
 }
 
 nav{
-    justify-self: flex-start;
+    align-items: space-between;
     width: 60px;
     height: 100vh;
     background-color: var(--main-dark-color);
     box-shadow: 6px 6px 8px 1px rgba(0, 0, 0, 0.507);
+}
+
+.btn-logout{
+    width: 2rem;
+    height: 2rem;
+    background-color: transparent;
+}
+
+.btn-logout svg{
+    color:var(--nav-elements-color);
+}
+
+.btn-logout svg:hover{
+    transform: scale(1.1);
+    cursor: pointer;
 }
 
 main{

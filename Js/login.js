@@ -1,16 +1,13 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut} from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+import {createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+import {auth} from "./database.js"
 
-const firebaseConfig = {
-    apiKey: "AIzaSyDLVuFsKSvHZLeKmRTi9NSlx5AA2D4TYog",
-    authDomain: "productivity-tracker-f2229.firebaseapp.com",
-    projectId: "productivity-tracker-f2229",
-    storageBucket: "productivity-tracker-f2229.appspot.com",
-    messagingSenderId: "41327823874",
-    appId: "1:41327823874:web:b6c6904cda2cc72f9b6b1b"
-};
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app)
+onAuthStateChanged(auth, (user) => {
+
+    if (user) {
+        console.log('User Is Signed In')
+        location.replace("../Pages/main_page.html")
+    }          
+})
 
 btnSubmit.addEventListener('click', () => {
 
@@ -35,7 +32,6 @@ function register(username, password){
   
       const user = userCredential.user;
   
-      console.log(user)
       window.alert('Conta Criada com Sucesso')
   
     })
@@ -46,7 +42,7 @@ function register(username, password){
   
       console.log(errorCode + errorMessage)
   
-    });
+    })
 }
 
 function login(username, password){
@@ -57,9 +53,10 @@ function login(username, password){
     .then((userCredential) => {
 
       const user = userCredential.user;
+      console.log(user.uid)
 
       window.alert('Conta Logada com Sucesso')
-      location.replace("../Pages/main_page.html")
+      location.replace("../Pages/main_page.html") 
 
     })
     .catch((error) => {
@@ -69,22 +66,6 @@ function login(username, password){
 
       console.log(errorCode + errorMessage)
 
-    });
-}
-
-function logout(){
-
-    signOut(auth).then(() => {
-        
-        window.alert('You logged out')
-
-      }).catch((error) => {
-
-        const errorCode = error.code;
-        const errorMessage = error.message;
-
-        console.log(errorCode + errorMessage)
-
-      });
+    })
 }
 
