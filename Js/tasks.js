@@ -8,6 +8,7 @@ const date = new Date()
 let yearSelected = date.getFullYear()
 let monthSelected = months[date.getMonth()]
 let daySelected = date.getDate()
+let anyTask = false
 
 onAuthStateChanged(auth, (user) => {
 
@@ -22,7 +23,8 @@ onAuthStateChanged(auth, (user) => {
 
                 snapshot.forEach(element => {
                     const task = new newTask(element.val().id, element.val().text, element.val().complete)
-                    task.create(checkTask, deleteTask, tasksConteiner, changeInputText)
+                    task.create(checkTask, deleteTask, tasksConteiner, changeInputText, inputTextEnter)
+                    anyTask = true
                 });
                 
             } else {
@@ -53,38 +55,42 @@ function createTaskId(){
 
 const tasksConteiner = document.querySelector('.tasks')
 const btnNewTask = document.querySelector('.btn-new-task')
-let i = 0
 
 btnNewTask.addEventListener('click', createNewTask)
 
+
 function createNewTask(){
 
-    btnNewTask.disabled = true
+    if(anyTask == false || focusOnLastInput()[0].value != '' ){
 
-    setTimeout(()=>{
-        btnNewTask.disabled = false
-    },1000)
+        anyTask = true;
 
-    const userUid = auth.currentUser.uid
-    const date = new Date()
+        btnNewTask.disabled = true
+    
+        setTimeout(()=>{
+            btnNewTask.disabled = false
+        },1000)
+    
+        const userUid = auth.currentUser.uid
+        const date = new Date()
+    
+        const newTaskSound = new Audio('../Sounds/newTaskSound.mp3')
+        newTaskSound.volume = 0.8
+        newTaskSound.play()
+    
+        const task = new newTask(createTaskId(), '', false)
+        task.create(checkTask, deleteTask, tasksConteiner, changeInputText, inputTextEnter)
 
-    const newTaskSound = new Audio('../Sounds/newTaskSound.mp3')
-    newTaskSound.volume = 0.8
-    newTaskSound.play()
-
-    i++
-
-    const task = new newTask(createTaskId(), 'New Task ' + i, false)
-    task.create(checkTask, deleteTask, tasksConteiner, changeInputText)
-
-    set(ref(database, 'users/' + userUid + `/${date.getFullYear()}`+ `/${months[date.getMonth()]}`+ `/${date.getDate()}`+ `/${task.id}`),task)
-
-    //Fazer a barra ser "scrollada" para baixo -> dessa forma a nova task adicionada estará sempre visível para o usuário
-    tasksConteiner.scrollTo({top:-50})
-    setTimeout(() =>{
-        tasksConteiner.scrollTo({top:0, behavior: 'smooth'})
-    }, 200)
-
+        focusOnLastInput()
+    
+        set(ref(database, 'users/' + userUid + `/${date.getFullYear()}`+ `/${months[date.getMonth()]}`+ `/${date.getDate()}`+ `/${task.id}`),task)
+    
+        //Fazer a barra ser "scrollada" para baixo -> dessa forma a nova task adicionada estará sempre visível para o usuário
+        tasksConteiner.scrollTo({top:-50})
+        setTimeout(() =>{
+            tasksConteiner.scrollTo({top:0, behavior: 'smooth'})
+        }, 200)
+    }
 }
 
 function deleteTask(){
@@ -102,9 +108,11 @@ function deleteTask(){
     }, 600)
 
     const dbRef = ref(getDatabase(),`users/${user}/${yearSelected}/${monthSelected}/${daySelected}/${this.id}`)
-    console.log(dbRef)
-    remove(dbRef).then(()=>{console.log('Deleted')})
+    remove(dbRef)
 
+    if(focusOnLastInput().length == 1){
+        anyTask = false
+    }
 }
 
 function checkTask(){
@@ -134,9 +142,37 @@ function checkTask(){
 
 function changeInputText(e){
 
-    const user = auth.currentUser.uid
-    const dbRef = ref(getDatabase(),`users/${user}/${yearSelected}/${monthSelected}/${daySelected}/${this.id}`)
+    if (e.target.value != ''){
+        const user = auth.currentUser.uid
+        const dbRef = ref(getDatabase(),`users/${user}/${yearSelected}/${monthSelected}/${daySelected}/${this.id}`)
+    
+        update(dbRef, {text:e.target.value})
+    }else{
+        deleteTask()
+    }
+}
 
-    update(dbRef, {text:e.target.value})
+let enterTimeout = false
 
+function inputTextEnter(e){
+
+    if(event.key === 'Enter' && enterTimeout == false && e.target.value != '' && focusOnLastInput()[0].value != '') {
+        createNewTask()   
+        enterTimeout = true 
+
+        setTimeout(() => {
+            enterTimeout = false
+        }, 1000)
+    }
+}
+
+function focusOnLastInput(){
+
+    const inputs = document.querySelectorAll('input')
+
+    setTimeout(() =>{
+        inputs[0].focus()
+    },700)
+
+    return inputs
 }
