@@ -5,7 +5,7 @@ onAuthStateChanged(auth, (user) => {
 
     if (user) {
         console.log('User Is Signed In')
-        location.replace("../Pages/main_page.html")
+        location.assign("/Pages/main_page.html")
     }          
 })
 
@@ -56,7 +56,7 @@ function login(username, password){
       console.log(user.uid)
 
       window.alert('Conta Logada com Sucesso')
-      location.replace("../Pages/main_page.html") 
+      location.assign("/Pages/main_page.html") 
 
     })
     .catch((error) => {
