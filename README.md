@@ -7,13 +7,17 @@ A ideia do projeto é basicamente criar um To-Do list misturado com um tracker d
 
 Para essa parte do projeto, decidi fazer algo bem interativo, bonito e funcional. Sendo assim, pesquisei algumas ideias até que encontrei uma de "slider" que me agradou bastante e decidi recriar. Dessa forma, o mesmo formulário que é usado para se registrar é usado também para fazer o login, sem a necessidade de mudar de página ou reescrever suas informações para isso, assim como é representado no gif a baixo:
 
-![](https://github.com/EduardaNunes/Productive-Tracking/blob/main/Imgs/Readme/Login_Example.gif)
+<p align="center">
+  <img src="https://github.com/EduardaNunes/Productive-Tracking/blob/main/Imgs/Readme/Login_Example.gif" width="50%" height="50%"/>
+</p>
 
 ## Tela de Tasks
 
 Nessa tela temos uma barra lateral, inicialmente, apenas com o botão para deslogar. Além disso temos a parte principal que é a lista To Do com a função de adicionar novas tarefas, excluí-las, editá-las e marcá-las como feitas. Todas essas mudanças são salvas automaticamente no RealTime DataBase do FireBase.
 
-![](https://github.com/EduardaNunes/Productive-Tracking/blob/main/Imgs/Readme/Task_Example.gif)
+<p align="center">
+  <img src="https://github.com/EduardaNunes/Productive-Tracking/blob/main/Imgs/Readme/Task_Example.gif" width="50%" height="50%"/>
+</p>
 
 ## Criado com
 
