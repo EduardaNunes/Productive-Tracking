@@ -53,7 +53,7 @@ function login(username, password){
     .then((userCredential) => {
 
       const user = userCredential.user;
-      console.log(user.uid)
+      //console.log(user.uid)
 
       window.alert('Conta Logada com Sucesso')
       window.location.href = "./Pages/main_page.html" 
